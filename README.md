@@ -1,4 +1,10 @@
-# splay-tree
+# CS 240 Final Project
+## Splay Tree Implementation
+## - insert
+## - print inOrder
+## - search
+## - delete key
+## - sorted array
 
 ###TODO List
 
