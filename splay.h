@@ -3,24 +3,25 @@
 
 #include <vector>
 #include <iostream>
+#include "node.h"
 
 class splay
 {
- public:
- splay():root(nullptr){};
-  ~splay();
-  void insert();
-  void inOrder();
-  node* search(double k);
-  void deleteKey(double k);
-  void sortedArray(); //?
-  
- private:
-  node* root;
-  void insert(node *nd,double dta);
-  void inOrder(node *nd);
-  node* find(node* nd,double k);
-  void deleteKey(node* nd, double k);
+	public:
+		splay():root(nullptr){};
+		~splay();
+		void insert(double dta);
+		void inOrder();
+		node* search(double dta);
+		void deleteKey(double dta);
+		// sortedArray(); //return array of tree with items inOrder
+
+	private:
+		node* root;
+		void insert(node *nd,double dta);
+		void inOrder(node *nd);
+		node* search(node* nd,double dta);
+		void deleteKey(node* nd, double dta);
 };
 
 #endif

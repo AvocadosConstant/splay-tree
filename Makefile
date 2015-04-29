@@ -10,4 +10,4 @@ splay.o: splay.h splay.cpp
 	g++ -g -c -std=c++11 splay.cpp
 
 clean:
-	rm *.o *~ main
+	rm *.o *~ *# main
