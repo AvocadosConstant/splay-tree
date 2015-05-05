@@ -72,9 +72,12 @@ node* splay::search(double dta)
 node* splay::search(node *nd, double dta)
 {
 	if(nd == nullptr) return nullptr;
-	if(nd->data == dta) return nd;
-	if(nd->data <= dta && nd->left!=nullptr) return search(nd->left, dta);
-	if(nd->data > dta && nd->right!=nullptr) return search(nd->right, dta);
+    if(nd->data == dta){
+       // std::cout << nd->data << std::endl;
+        return nd;
+    }
+	if(nd->data > dta && nd->left!=nullptr) return search(nd->left, dta);
+	if(nd->data < dta && nd->right!=nullptr) return search(nd->right, dta);
 	return nullptr;
 }
 
@@ -98,9 +101,43 @@ node* splay::max(node *nd){
 node* splay::deleteKey(double dta)
 {
   if(root == nullptr)return nullptr;
-  return deleteKey(root, dta);
+    node* nd = search(dta);
+    if (nd == nullptr)return nullptr;
+    
+    if(nd->right == nullptr && nd->left != nullptr){
+        nd->left->parent = nd->parent;
+        if(nd->parent->left == nd){
+            nd->parent->left = nd->left;
+        }
+        else{
+            nd->parent->right = nd->left;
+        }
+    }
+    else if(nd->left == nullptr && nd->right != nullptr){
+        nd->right->parent = nd->parent;
+        if(nd->parent->left == nd){
+            nd->parent->left = nd->right;
+        }
+        else{
+            nd->parent->right = nd->right;
+        }
+    }
+    else{
+        node* newNode = max(nd->left);
+        newNode->parent = nd->parent;
+        if(nd->parent->left == nd){
+            nd->parent->left = newNode;
+        }
+        else{
+            nd->parent->right = newNode;
+        }
+        newNode->right = nd->right;
+    }
+    return nd;
+
 }
 
+/*
 node* splay::deleteKey(node* nd, double dta)
 {
     if(nd == nullptr)return nullptr;
@@ -144,7 +181,7 @@ node* splay::deleteKey(node* nd, double dta)
     }
 	return nullptr;
 }
-
+*/
     /*
 
 //case1 no child
