@@ -137,11 +137,12 @@ node* splay::deleteKey(node* nd, double dta)
         return nd;
     }
     else if(dta < nd->data){
-        deleteKey(nd->left, dta);
+        return deleteKey(nd->left, dta);
     }
     else if(dta > nd->data){
-        deleteKey(nd->right, dta);
+        return deleteKey(nd->right, dta);
     }
+	return nullptr;
 }
 
     /*
