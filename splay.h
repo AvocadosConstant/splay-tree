@@ -13,7 +13,9 @@ class splay
 		void insert(double dta);
 		void inOrder();
 		node* search(double dta);
-		void deleteKey(double dta);
+        node* min(node* nd);
+        node* max(node* nd);
+		node* deleteKey(double dta);
 		// sortedArray(); //return array of tree with items inOrder
 
 	private:
@@ -21,7 +23,7 @@ class splay
 		void insert(node *nd,double dta);
 		void inOrder(node *nd);
 		node* search(node* nd,double dta);
-		void deleteKey(node* nd, double dta);
+		node* deleteKey(node* nd, double dta);
 };
 
 #endif
