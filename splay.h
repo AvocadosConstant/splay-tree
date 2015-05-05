@@ -14,7 +14,7 @@ class splay
 		void inOrder();
 		node* search(double dta);
         node* min(node* nd);
-        node* max(node* nd);
+        node* max(node* nd);
 		node* deleteKey(double dta);
 		// sortedArray(); //return array of tree with items inOrder
 
