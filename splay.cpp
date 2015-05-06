@@ -1,4 +1,4 @@
-#include "splay.h"
+ #include "splay.h"
 
 splay::~splay()
 {
@@ -27,6 +27,7 @@ void splay::insert(node *nd, double dta)
 		{
 			node *newNode = new node(dta);
 			nd->right = newNode;
+            nd->right->parent = nd;
 		}
 		else insert(nd->right, dta);
 	}
@@ -36,6 +37,7 @@ void splay::insert(node *nd, double dta)
 		{
 			node *newNode = new node(dta);
 			nd->left = newNode;
+            nd->left->parent = nd;
 		}
 		else insert(nd->left, dta);
 	}
@@ -136,82 +138,6 @@ node* splay::deleteKey(double dta)
     return nd;
 
 }
-
-/*
-node* splay::deleteKey(node* nd, double dta)
-{
-    if(nd == nullptr)return nullptr;
-    if(dta == nd->data){
-        
-        if(nd->right == nullptr && nd->left != nullptr){
-            nd->left->parent = nd->parent;
-            if(nd->parent->left == nd){
-                nd->parent->left = nd->left;
-            }
-            else{
-                nd->parent->right = nd->left;
-            }
-        }
-        else if(nd->left == nullptr && nd->right != nullptr){
-            nd->right->parent = nd->parent;
-            if(nd->parent->left == nd){
-                nd->parent->left = nd->right;
-            }
-            else{
-                nd->parent->right = nd->right;
-            }
-        }
-        else{
-            node* newNode = max(nd->left);
-            newNode->parent = nd->parent;
-            if(nd->parent->left == nd){
-                nd->parent->left = newNode;
-            }
-            else{
-                nd->parent->right = newNode;
-            }
-        }
-        return nd;
-    }
-    else if(dta < nd->data){
-        return deleteKey(nd->left, dta);
-    }
-    else if(dta > nd->data){
-        return deleteKey(nd->right, dta);
-    }
-	return nullptr;
-}
-*/
-    /*
-
-//case1 no child
-    else if(nd->left == nullptr && nd->right == nullptr){
-        delete nd;
-        nd = nullptr;
-    }
-//case2 one child
-    else if(nd->left == nullptr && nd->right != nullptr){
-        node* tmp = nd;
-        nd = nd->right;
-        delete tmp;
-    }
-    else if(nd->right == nullptr && nd->left != nullptr){
-        node* nemp = nd;
-        nd = nd->left;
-        delete nemp;
-    }
-    //case 3 two children
-    else if(nd->left != nullptr && nd->right != nullptr){
-        node* newNode = min(nd->right);
-        nd->data = newNode->data;
-        deleteKey(nd->right, newNode->data);
-        nd = nd->right;
-    }
-    
-    //recursive
-    
-  return;
-     */
 
 
 
