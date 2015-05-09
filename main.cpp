@@ -12,10 +12,11 @@ int main(int argc, char const *argv[])
   s.insert(11);
   s.inOrder();
   
-    
+  
   std::cout << "del 11" << std::endl;
   s.deleteKey(11);
   s.inOrder();
+    /*
   std::cout << "del 6" << std::endl;
   s.deleteKey(6);
   s.inOrder();
@@ -28,6 +29,8 @@ int main(int argc, char const *argv[])
 
   s.search(8);
   s.search(12);
+   */
   std::cout << "main is running." << std::endl;
   return 0;
+
 }

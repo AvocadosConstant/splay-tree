@@ -7,6 +7,8 @@ splay::~splay()
 //-----------
 // insert
 //-----------
+
+
 void splay::insert(double dta)
 {
 	if(root == nullptr)
@@ -21,13 +23,16 @@ void splay::insert(double dta)
 
 void splay::insert(node *nd, double dta)
 {
+    //first search forr i. If the search is succesful then splay at the node containing i.
+    //if search is not sucessful
+    node *newNode = new node(dta);
+    if(nd == nullptr)return;
 	if(nd->data < dta)
 	{
 		if(nd->right == nullptr)
 		{
-			node *newNode = new node(dta);
+            newNode->parent = nd;
 			nd->right = newNode;
-            nd->right->parent = nd;
 		}
 		else insert(nd->right, dta);
 	}
@@ -35,9 +40,8 @@ void splay::insert(node *nd, double dta)
 	{
 		if(nd->left == nullptr)
 		{
-			node *newNode = new node(dta);
+            newNode->parent = nd;
 			nd->left = newNode;
-            nd->left->parent = nd;
 		}
 		else insert(nd->left, dta);
 	}
@@ -100,6 +104,22 @@ node* splay::max(node *nd){
     return max(nd->right);
 }
 
+//switch
+void splay::switchf(node* nd1, node* nd2){
+    if (nd1->parent == nullptr) root = nd2;
+    else if(nd1 == nd1->parent->left){
+        nd1->parent->left = nd2;
+    }
+    else{
+        nd1->parent->right = nd2;
+    }
+    if(nd2 != nullptr){
+        nd2->parent = nd1->parent;
+    }
+}
+
+/*
+
 node* splay::deleteKey(double dta)
 {
   if(root == nullptr)return nullptr;
@@ -126,7 +146,7 @@ node* splay::deleteKey(double dta)
     }
     else{
         node* newNode = max(nd->left);
-        newNode->parent = nd->parent;
+        //newNode->parent = nd->parent;
         if(nd->parent->left == nd){
             nd->parent->left = newNode;
         }
@@ -138,7 +158,38 @@ node* splay::deleteKey(double dta)
     return nd;
 
 }
+*/
 
+void splay::deleteKey(double dta)
+{
+    if(root == nullptr)return;
+    node* nd = search(dta);
+    if (nd == nullptr)return;
+    //splay(nd);
+    if(nd->left == nullptr && nd->right != nullptr){
+        switchf(nd, nd->right);
+    }
+    else if(nd->right == nullptr && nd->left != nullptr){
+        switchf(nd, nd->left);
+    }
+    else{
+        node* tmp = max(nd->left);
+        if(tmp->parent != nd){
+            switchf(tmp, tmp->left);
+            tmp->left = nd->left;
+            tmp->left->parent = tmp;
+        }
+        switchf(nd, tmp);
+        tmp->right = nd->right;
+        tmp->right->parent = tmp;
+    }
+    delete nd;
+}
 
+    
+    
+    
+    
+    
 
 //sorted array
