@@ -56,7 +56,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->right = newNode;
             newNode->parent = nd;
-            splay(nd);
+            splayf(nd);
         }
         else{
             insert(nd->right,dta);
@@ -67,7 +67,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->left = newNode;
             newNode->parent = nd;
-            splay(nd);
+            splayf(nd);
         }
         else{
             insert(nd->left,dta);
@@ -157,14 +157,16 @@ void splay::printBreadthFirst(){
     qe.push(root);
     while(!qe.empty()){
         node* tmp = qe.front();
-        qe.pop();
-        std::cout<< tmp->data << std::endl;
         if(tmp->right != nullptr){
             qe.push(tmp->right);
         }
         if(tmp->left != nullptr){
             qe.push(tmp->left);
         }
+        
+        std::cout<< tmp->data << std::endl;
+
+        qe.pop();
     }
 }
 
@@ -204,6 +206,8 @@ node* splay::search(node *nd, double dta)
 	}
     if(nd->data == dta){
         std::cout << "Found node with value " << nd->data << std::endl;
+       // std::cout << nd->data << std::endl;
+        splayf(nd);
         return nd;
     }
 	if(nd->data > dta && nd->left!=nullptr) return search(nd->left, dta);
