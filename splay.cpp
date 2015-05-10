@@ -135,14 +135,16 @@ void splay::printBreadthFirst(){
     qe.push(root);
     while(!qe.empty()){
         node* tmp = qe.front();
-        qe.pop();
-        std::cout<< tmp->data << std::endl;
         if(tmp->right != nullptr){
             qe.push(tmp->right);
         }
         if(tmp->left != nullptr){
             qe.push(tmp->left);
         }
+        
+        std::cout<< tmp->data << std::endl;
+
+        qe.pop();
     }
 }
 
