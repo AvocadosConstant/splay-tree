@@ -11,11 +11,16 @@ class splay
 		splay():root(nullptr){};
 		~splay();
 		void insert(double dta);
+    void leftRotate(node* nd);
+    void rightRotate(node* nd);
+    void splayf(node* nd);
+    void printBreadthFirst();
 		void inOrder();
 		node* search(double dta);
         node* min(node* nd);
         node* max(node* nd);
-		node* deleteKey(double dta);
+	//	node* deleteKey(double dta);
+    //void switchf(node* nd1, node* nd2);
 		// sortedArray(); //return array of tree with items inOrder
 
 	private:
