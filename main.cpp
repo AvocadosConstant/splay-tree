@@ -9,10 +9,12 @@ int main(int argc, char const *argv[])
   s.insert(10);
   s.insert(8);
   s.insert(13);
-    std::cout << "proving" << std::endl;
+    std::cout << "breadth" << std::endl;
     
     s.printBreadthFirst();
 
+    std::cout << "inorder" << std::endl;
+    s.inOrder();
     /*
   s.insert(6);
   s.insert(20);

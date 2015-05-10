@@ -60,11 +60,11 @@ void splay::leftRotate(node* nd){
     nd->right = tmp->left;
     tmp->left = nd;
     if(nd->right != nullptr){
-        tmp->parent->right = nd;
+        nd->right->parent = nd;
     }
     tmp->parent = nd->parent;
     if(nd->parent == nullptr){
-        root = nd;
+        root = tmp;
     }
     else if(nd->parent->right == nd){
         nd->parent->right = tmp;
@@ -81,13 +81,12 @@ void splay::rightRotate(node* nd){
         node* tmp = nd->left;
         nd->left = tmp->right;
         tmp->right = nd;
-        if(nd->left != nullptr){//changed left to right
-            nd->left->parent = nd; //changed left to right
+        if(nd->left != nullptr){
+            nd->left->parent = nd;
         }
         tmp->parent = nd->parent;
         if(nd->parent == nullptr){
             root = tmp;
-            //tmp->parent = nullptr;
         }
         else if(nd->parent->left == nd){
             nd->parent->left = tmp;
@@ -99,8 +98,8 @@ void splay::rightRotate(node* nd){
 }
 
 void splay::splayf(node* nd){
-    while(nd->parent){
-        if(nd->parent->parent != nullptr){
+    while(nd->parent != nullptr){
+        if(nd->parent->parent == nullptr){
             if(nd->parent->left == nd){
                 rightRotate(nd->parent);
             }
