@@ -1,5 +1,7 @@
 #include "splay.h"
 #include <iostream>
+#include <stack>
+#include <queue>
 
 int main(int argc, char const *argv[])
 {
@@ -7,16 +9,23 @@ int main(int argc, char const *argv[])
   s.insert(10);
   s.insert(8);
   s.insert(13);
+    std::cout << "proving" << std::endl;
+    
+    s.printBreadthFirst();
+
+    /*
   s.insert(6);
   s.insert(20);
   s.insert(11);
-  s.inOrder();
-  
-  
+      s.inOrder();
+    std::cout << "proving" << std::endl;
+
+    s.printBreadthFirst();
+  */
+  /*
   std::cout << "del 11" << std::endl;
   s.deleteKey(11);
   s.inOrder();
-    /*
   std::cout << "del 6" << std::endl;
   s.deleteKey(6);
   s.inOrder();
