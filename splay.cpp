@@ -34,7 +34,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->right = newNode;
             newNode->parent = nd;
-            splay(nd);
+            splayf(nd);
         }
         else{
             insert(nd->right,dta);
@@ -45,7 +45,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->left = newNode;
             newNode->parent = nd;
-            splay(nd);
+            splayf(nd);
         }
         else{
             insert(nd->left,dta);
@@ -180,6 +180,7 @@ node* splay::search(node *nd, double dta)
 	if(nd == nullptr) return nullptr;
     if(nd->data == dta){
        // std::cout << nd->data << std::endl;
+        splayf(nd);
         return nd;
     }
 	if(nd->data > dta && nd->left!=nullptr) return search(nd->left, dta);
