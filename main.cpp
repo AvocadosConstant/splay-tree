@@ -11,8 +11,7 @@ int main(int argc, char const *argv[])
   s.insert(20);
   s.insert(11);
   s.inOrder();
-  
-    
+
   std::cout << "del 11" << std::endl;
   s.deleteKey(11);
   s.inOrder();

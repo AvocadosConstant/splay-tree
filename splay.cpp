@@ -27,6 +27,7 @@ void splay::insert(node *nd, double dta)
 		{
 			node *newNode = new node(dta);
 			nd->right = newNode;
+			newNode->parent = nd;
 		}
 		else insert(nd->right, dta);
 	}
@@ -36,6 +37,7 @@ void splay::insert(node *nd, double dta)
 		{
 			node *newNode = new node(dta);
 			nd->left = newNode;
+			newNode->parent = nd;
 		}
 		else insert(nd->left, dta);
 	}
@@ -71,9 +73,13 @@ node* splay::search(double dta)
 
 node* splay::search(node *nd, double dta)
 {
-	if(nd == nullptr) return nullptr;
+	if(nd == nullptr)
+	{
+		std::cout << "Did not find node with value " << dta << std::endl;
+		return nullptr;
+	}
     if(nd->data == dta){
-       // std::cout << nd->data << std::endl;
+        std::cout << "Found node with value " << nd->data << std::endl;
         return nd;
     }
 	if(nd->data > dta && nd->left!=nullptr) return search(nd->left, dta);
@@ -81,7 +87,6 @@ node* splay::search(node *nd, double dta)
 	return nullptr;
 }
 
-//added min
 node* splay::min(node *nd){
     if(nd == nullptr)return nullptr;
     if(nd->left == nullptr){
@@ -91,8 +96,12 @@ node* splay::min(node *nd){
 }
 
 node* splay::max(node *nd){
+	std::cout << "    MAX: called" << std::endl;
+	std::cout << "    MAX: nd parent value is  " << nd->parent->data << std::endl;
+	std::cout << "    MAX: nd value is " << nd->data << std::endl;
     if(nd == nullptr)return nullptr;
     if(nd->right == nullptr){
+		std::cout << "    MAX: nd is max of tree" << std::endl;
         return nd;
     }
     return max(nd->right);
@@ -100,41 +109,53 @@ node* splay::max(node *nd){
 
 node* splay::deleteKey(double dta)
 {
-  if(root == nullptr)return nullptr;
+    if(root == nullptr)return nullptr;
     node* nd = search(dta);
     if (nd == nullptr)return nullptr;
-    
-    if(nd->right == nullptr && nd->left != nullptr){
+
+	// nd has only a left child
+    if(nd->right == nullptr && nd->left != nullptr)
+	{
+		std::cout << "    DEL: nd has only left child" << std::endl;
         nd->left->parent = nd->parent;
-        if(nd->parent->left == nd){
-            nd->parent->left = nd->left;
-        }
-        else{
-            nd->parent->right = nd->left;
-        }
+        if(nd->parent->left == nd) nd->parent->left = nd->left;
+        else nd->parent->right = nd->left;
     }
-    else if(nd->left == nullptr && nd->right != nullptr){
+	// nd has only a right child
+    else if(nd->left == nullptr && nd->right != nullptr)
+	{
+		std::cout << "    DEL: nd has only right child" << std::endl;
         nd->right->parent = nd->parent;
-        if(nd->parent->left == nd){
-            nd->parent->left = nd->right;
-        }
-        else{
-            nd->parent->right = nd->right;
-        }
+        if(nd->parent->left == nd) nd->parent->left = nd->right;
+        else nd->parent->right = nd->right;
     }
-    else{
-        node* newNode = max(nd->left);
+    //If node to delete has two children
+	else
+	{
+		std::cout << "    DEL: nd has 2 children" << std::endl;
+		std::cout << "    DEL: nd value: " << nd->data << std::endl;
+		std::cout << "    DEL: nd parent value: " << nd->parent->data << std::endl;
+		std::cout << "    DEL: nd left value: " << nd->left->data << std::endl;
+		std::cout << "    DEL: nd right value: " << nd->right->data << std::endl;
+
+        node* newNode = max(nd->left);	//newNode is rightmost child of left subtree
+
+		std::cout << "    DEL: newNode has value of " << newNode->data << std::endl;
+		//setting children
+		if(newNode != nd->left)
+		{
+			newNode->left = nd->left;
+			newNode->left->parent = newNode;
+        }
+		newNode->right = nd->right;
+		newNode->right->parent = newNode;
+
+		//setting parent
         newNode->parent = nd->parent;
-        if(nd->parent->left == nd){
-            nd->parent->left = newNode;
-        }
-        else{
-            nd->parent->right = newNode;
-        }
-        newNode->right = nd->right;
+        if(nd->parent->left == nd) nd->parent->left = newNode;
+        else nd->parent->right = newNode;
     }
     return nd;
-
 }
 
 /*
