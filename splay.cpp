@@ -27,6 +27,7 @@ void splay::insert(double dta)
 
 void splay::insert(node *nd,double dta)
 {
+/*
 	if(nd->data < dta)
 	{
 		if(nd->right == nullptr)
@@ -48,7 +49,7 @@ void splay::insert(node *nd,double dta)
 		else insert(nd->left, dta);
 	}
 	return;
-
+*/
     if(nd == nullptr)return;
 
     if(dta > nd->data){
@@ -56,7 +57,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->right = newNode;
             newNode->parent = nd;
-            splayf(nd);
+            splayf(newNode);
         }
         else{
             insert(nd->right,dta);
@@ -67,7 +68,7 @@ void splay::insert(node *nd,double dta)
             node *newNode = new node(dta);
             nd->left = newNode;
             newNode->parent = nd;
-            splayf(nd);
+            splayf(newNode);
         }
         else{
             insert(nd->left,dta);
@@ -121,8 +122,10 @@ void splay::rightRotate(node* nd){
 
 void splay::splayf(node* nd){
     while(nd->parent != nullptr){
+		//if nd->parent is root
         if(nd->parent->parent == nullptr){
-            if(nd->parent->left == nd){
+            //if nd is left child
+			if(nd->parent->left == nd){
                 rightRotate(nd->parent);
             }
             else{

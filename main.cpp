@@ -8,13 +8,56 @@ int main(int argc, char const *argv[])
   splay s;
 
   std::cout << "inserting 9, 4, 13, 6, 20, 11" << std::endl;
-  s.insert(9);
-  s.insert(4);
-  s.insert(13);
-  s.insert(6);
-  s.insert(20);
-  s.insert(11);
 
+  std::cout << std::endl;
+  std::cout << "inserting 9";
+  s.insert(9);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl;
+  std::cout << "inserting 4";
+  s.insert(4);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl;
+  std::cout << "inserting 13";
+  s.insert(13);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl;
+  std::cout << "inserting 6";
+  s.insert(6);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl;
+  std::cout << "inserting 20";
+  s.insert(20);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl;
+  std::cout << "inserting 11";
+  s.insert(11);
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+/*
   std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
 
@@ -40,6 +83,7 @@ int main(int argc, char const *argv[])
 
   std::cout << std::endl << "breadth first print" << std::endl;
   s.printBreadthFirst();
+*/
 
 /*
   std::cout << std::endl << "left rotate on right of root" << std::endl;
@@ -52,6 +96,7 @@ int main(int argc, char const *argv[])
   s.printBreadthFirst();
 */
 
+/*
   std::cout << std::endl << "splay on left of right of root" << std::endl;
   s.splayf(s.getRoot()->right->left);
 
@@ -60,6 +105,7 @@ int main(int argc, char const *argv[])
 
   std::cout << std::endl << "breadth first print" << std::endl;
   s.printBreadthFirst();
+*/
 
 /*
   std::cout << "del 11" << std::endl;
