@@ -13,6 +13,8 @@ splay::~splay()
 
 void splay::insert(double dta)
 {
+	std::cout << std::endl << "Insert: " << dta << std::endl;
+
 	if(root == nullptr)
 	{
 		node *newNode = new node(dta);
@@ -240,15 +242,8 @@ node* splay::min(node *nd){
 // max
 //-----------
 node* splay::max(node *nd){
-/*	std::cout << "    MAX: called" << std::endl;
-	std::cout << "    MAX: nd parent value is  " << nd->parent->data << std::endl;
-	std::cout << "    MAX: nd value is " << nd->data << std::endl;
-*/
     if(nd == nullptr)return nullptr;
-    if(nd->right == nullptr){
-		std::cout << "    MAX: nd is max of tree" << std::endl;
-        return nd;
-    }
+    if(nd->right == nullptr) return nd;
     return max(nd->right);
 }
 
@@ -288,7 +283,7 @@ node* splay::deleteKey(double dta)
 	// nd has only a left child
     else if(nd->right == nullptr && nd->left != nullptr)
 	{
-		std::cout << "    DEL: nd has only left child" << std::endl;
+		//std::cout << "    DEL: nd has only left child" << std::endl;
 		nd->left->parent = nullptr;
 		root = nd->left;
         /*nd->left->parent = nd->parent;
@@ -299,7 +294,7 @@ node* splay::deleteKey(double dta)
 	// nd has only a right child
     else if(nd->left == nullptr && nd->right != nullptr)
 	{
-		std::cout << "    DEL: nd has only right child" << std::endl;
+		//std::cout << "    DEL: nd has only right child" << std::endl;
 		nd->right->parent = nullptr;
 		root = nd->right;
         /*
@@ -353,3 +348,15 @@ node* splay::deleteKey(double dta)
 
 
 //sorted array
+
+
+
+
+void splay::print()
+{
+	std::cout  << "    InOrder Print" << std::endl;
+	inOrder();
+	std::cout << "    Breadth First Print" << std::endl;
+	printBreadthFirst();
+	std::cout << std::endl;
+}
