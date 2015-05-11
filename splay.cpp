@@ -13,6 +13,7 @@ splay::~splay()
 
 void splay::insert(double dta)
 {
+	size++;
 	std::cout << std::endl << "Insert: " << dta << std::endl;
 
 	if(root == nullptr)
@@ -29,29 +30,6 @@ void splay::insert(double dta)
 
 void splay::insert(node *nd,double dta)
 {
-/*
-	if(nd->data < dta)
-	{
-		if(nd->right == nullptr)
-		{
-			node *newNode = new node(dta);
-			nd->right = newNode;
-			newNode->parent = nd;
-		}
-		else insert(nd->right, dta);
-	}
-	else
-	{
-		if(nd->left == nullptr)
-		{
-			node *newNode = new node(dta);
-			nd->left = newNode;
-			newNode->parent = nd;
-		}
-		else insert(nd->left, dta);
-	}
-	return;
-*/
     if(nd == nullptr)return;
 
     if(dta > nd->data){
@@ -283,40 +261,20 @@ node* splay::deleteKey(double dta)
 	// nd has only a left child
     else if(nd->right == nullptr && nd->left != nullptr)
 	{
-		//std::cout << "    DEL: nd has only left child" << std::endl;
 		nd->left->parent = nullptr;
 		root = nd->left;
-        /*nd->left->parent = nd->parent;
-        if(nd->parent->left == nd) nd->parent->left = nd->left;
-        else nd->parent->right = nd->left;
-		*/
     }
 	// nd has only a right child
     else if(nd->left == nullptr && nd->right != nullptr)
 	{
-		//std::cout << "    DEL: nd has only right child" << std::endl;
 		nd->right->parent = nullptr;
 		root = nd->right;
-        /*
-		nd->right->parent = nd->parent;
-        if(nd->parent->left == nd) nd->parent->left = nd->right;
-        else nd->parent->right = nd->right;
-		*/
     }
 
     //If node to delete has two children
 	else
 	{
-/*
-		std::cout << "    DEL: nd has 2 children" << std::endl;
-		std::cout << "    DEL: nd value: " << nd->data << std::endl;
-		std::cout << "    DEL: nd left value: " << nd->left->data << std::endl;
-		std::cout << "    DEL: nd right value: " << nd->right->data << std::endl;
-*/
         node* newNode = max(nd->left);	//newNode is rightmost child of left subtree
-
-//		std::cout << "    DEL: newNode has value of " << newNode->data << std::endl;
-
 
 		//splay newnode to top of left subtree
 		nd->left->parent = nullptr;
@@ -326,34 +284,34 @@ node* splay::deleteKey(double dta)
 		newNode->right = nd->right;
 		newNode->right->parent = newNode;
 
-/*
-		//setting children
-		if(newNode != nd->left)
-		{
-			
-			newNode->left = nd->left;
-			newNode->left->parent = newNode;
-        }
-		newNode->right = nd->right;
-		newNode->right->parent = newNode;
-
-		//setting parent
-        newNode->parent = nd->parent;
-        if(nd->parent->left == nd) nd->parent->left = newNode;
-        else nd->parent->right = newNode;
-*/
     }
+	size--;
     return nd;
 }
 
 
 //sorted array
+std::vector<double> splay::sortedArray()
+{
+	std::vector<double> vct;
+	if(root == nullptr) return vct;
+	sortedArray(root, vct);
+	return vct;
+}
 
+void splay::sortedArray(node* nd, std::vector<double>& vct)
+{
+	if(nd == nullptr) return;
+	sortedArray(nd->left, vct);
+	vct.push_back(nd->data);
+	sortedArray(nd->right, vct);
+}
 
 
 
 void splay::print()
 {
+	std::cout << "Size: " << size << std::endl;
 	std::cout  << "    InOrder Print" << std::endl;
 	inOrder();
 	std::cout << "    Breadth First Print" << std::endl;

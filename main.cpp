@@ -2,12 +2,11 @@
 #include <iostream>
 #include <stack>
 #include <queue>
+#include <vector>
 
 int main(int argc, char const *argv[])
 {
   splay s;
-
-  std::cout << "inserting 9, 4, 13, 6, 20, 11" << std::endl;
 
   s.insert(9);
   s.print();
@@ -26,6 +25,12 @@ int main(int argc, char const *argv[])
 
   s.insert(11);
   s.print();
+
+
+  std::vector<double> vct = s.sortedArray();
+  std::cout << "Printing from sorted array" << std::endl;
+  for(auto dta : vct) std::cout << dta << std::endl;
+
 
 
   std::cout << std::endl;

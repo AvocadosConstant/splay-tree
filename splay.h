@@ -8,7 +8,7 @@
 class splay
 {
 	public:
-		splay():root(nullptr){};
+		splay():root(nullptr),size(0){};
 		~splay();
 		void insert(double dta);
 	    void leftRotate(node* nd);
@@ -21,8 +21,9 @@ class splay
         node* max(node* nd);
 		node* deleteKey(double dta);
 	    //void switchf(node* nd1, node* nd2);
-		// sortedArray(); //return array of tree with items inOrder
+		std::vector<double> sortedArray(); //return array of tree with items inOrder
 		node* getRoot(){return root;};
+		int getSize(){return size;};
 		void print();
 
 	private:
@@ -31,6 +32,8 @@ class splay
 		void inOrder(node *nd);
 		node* search(node* nd,double dta);
 		node* deleteKey(node* nd, double dta);
+		void sortedArray(node* nd, std::vector<double>& vct);
+		int size;
 };
 
 #endif
