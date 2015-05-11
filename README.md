@@ -1,23 +1,14 @@
 # CS 240 Final Project
 ## Splay Tree Implementation
-## - insert
-## - print inOrder
-## - search
-## - delete key
-## - sorted array
+### done - insert
+### done - print inOrder
+### done - search
+### done - delete key
+### done - sorted array
 
 ###TODO List
 
-- create node files
-	- struct
-	- parent, left, right
-
-- Import over insert, inorder, rotate, find.
-
-	sorted array?
-
-- Create splay function (zig-zig, zig-zag)
-
-- GUI stuff
+- template everything
+- Qt
 
 Due Tuesday of finals week.
