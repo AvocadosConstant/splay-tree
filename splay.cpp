@@ -147,23 +147,23 @@ void splay::splayf(node* nd){
         }
     }
 }
+
 //-----------
 // print Breadth
 //-----------
-
 void splay::printBreadthFirst(){
     if(root == nullptr)return;
     std::queue<node*> qe;
     qe.push(root);
     while(!qe.empty()){
         node* tmp = qe.front();
-        if(tmp->right != nullptr){
-            qe.push(tmp->right);
-        }
         if(tmp->left != nullptr){
             qe.push(tmp->left);
         }
-        
+        if(tmp->right != nullptr){
+            qe.push(tmp->right);
+        }
+
         std::cout<< tmp->data << std::endl;
 
         qe.pop();

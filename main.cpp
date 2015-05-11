@@ -6,25 +6,34 @@
 int main(int argc, char const *argv[])
 {
   splay s;
+
+  std::cout << "inserting 9, 4, 13, 6, 20, 11" << std::endl;
   s.insert(9);
   s.insert(4);
-  //s.insert(13);
-    std::cout << "breadth" << std::endl;
-
-    s.printBreadthFirst();
-
-    /*
+  s.insert(13);
   s.insert(6);
   s.insert(20);
   s.insert(11);
+
+  std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
 
-      s.inOrder();
-    std::cout << "proving" << std::endl;
+ // std::cout << "proving" << std::endl;
 
-    s.printBreadthFirst();
-  */
-  /*
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+  std::cout << std::endl << "left rotate on root" << std::endl;
+  s.leftRotate(s.getRoot());
+
+  std::cout << std::endl << "inorder print" << std::endl;
+  s.inOrder();
+
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
+
+/*
   std::cout << "del 11" << std::endl;
   s.deleteKey(11);
   s.inOrder();
@@ -37,10 +46,10 @@ int main(int argc, char const *argv[])
   std::cout << "del 20" << std::endl;
   s.deleteKey(20);
   s.inOrder();
+*/
+//  s.search(8);
+  //s.search(12);
 
-  s.search(8);
-  s.search(12);
-   */
   std::cout << "main is running." << std::endl;
   return 0;
 

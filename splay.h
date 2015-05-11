@@ -22,6 +22,7 @@ class splay
 	//	node* deleteKey(double dta);
     //void switchf(node* nd1, node* nd2);
 		// sortedArray(); //return array of tree with items inOrder
+		node* getRoot(){return root;};
 
 	private:
 		node* root;
