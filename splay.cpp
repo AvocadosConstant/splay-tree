@@ -149,6 +149,7 @@ void splay::splayf(node* nd){
             rightRotate(nd->parent);
         }
     }
+	root = nd;
 }
 
 //-----------
@@ -211,12 +212,14 @@ node* splay::search(node *nd, double dta)
 	}
     if(nd->data == dta){
         std::cout << "Found node with value " << nd->data << std::endl;
-       // std::cout << nd->data << std::endl;
+        //std::cout << nd->data << std::endl;
         splayf(nd);
         return nd;
     }
 	if(nd->data > dta && nd->left!=nullptr) return search(nd->left, dta);
 	if(nd->data < dta && nd->right!=nullptr) return search(nd->right, dta);
+
+	std::cout << "Did not find node with value " << dta << std::endl;
 	return nullptr;
 }
 
@@ -237,9 +240,10 @@ node* splay::min(node *nd){
 // max
 //-----------
 node* splay::max(node *nd){
-	std::cout << "    MAX: called" << std::endl;
+/*	std::cout << "    MAX: called" << std::endl;
 	std::cout << "    MAX: nd parent value is  " << nd->parent->data << std::endl;
 	std::cout << "    MAX: nd value is " << nd->data << std::endl;
+*/
     if(nd == nullptr)return nullptr;
     if(nd->right == nullptr){
 		std::cout << "    MAX: nd is max of tree" << std::endl;
@@ -250,11 +254,11 @@ node* splay::max(node *nd){
 
 /*
 
- 
+
 //-----------
 // delete
 //-----------
- 
+
 //switch
 void splay::switchf(node* nd1, node* nd2){
     if (nd1->parent == nullptr) root = nd2;
@@ -269,44 +273,69 @@ void splay::switchf(node* nd1, node* nd2){
     }
 }
 
-
+*/
 node* splay::deleteKey(double dta)
 {
     if(root == nullptr)return nullptr;
     node* nd = search(dta);
     if (nd == nullptr)return nullptr;
 
+	//because search was called, nd is the root!!!
+
+	//if nd has no children
+	if(nd->left == nullptr && nd->right == nullptr) root = nullptr;
+
 	// nd has only a left child
-    if(nd->right == nullptr && nd->left != nullptr)
+    else if(nd->right == nullptr && nd->left != nullptr)
 	{
 		std::cout << "    DEL: nd has only left child" << std::endl;
-        nd->left->parent = nd->parent;
+		nd->left->parent = nullptr;
+		root = nd->left;
+        /*nd->left->parent = nd->parent;
         if(nd->parent->left == nd) nd->parent->left = nd->left;
         else nd->parent->right = nd->left;
+		*/
     }
 	// nd has only a right child
     else if(nd->left == nullptr && nd->right != nullptr)
 	{
 		std::cout << "    DEL: nd has only right child" << std::endl;
-        nd->right->parent = nd->parent;
+		nd->right->parent = nullptr;
+		root = nd->right;
+        /*
+		nd->right->parent = nd->parent;
         if(nd->parent->left == nd) nd->parent->left = nd->right;
         else nd->parent->right = nd->right;
+		*/
     }
+
     //If node to delete has two children
 	else
 	{
+/*
 		std::cout << "    DEL: nd has 2 children" << std::endl;
 		std::cout << "    DEL: nd value: " << nd->data << std::endl;
-		std::cout << "    DEL: nd parent value: " << nd->parent->data << std::endl;
 		std::cout << "    DEL: nd left value: " << nd->left->data << std::endl;
 		std::cout << "    DEL: nd right value: " << nd->right->data << std::endl;
-
+*/
         node* newNode = max(nd->left);	//newNode is rightmost child of left subtree
 
-		std::cout << "    DEL: newNode has value of " << newNode->data << std::endl;
+//		std::cout << "    DEL: newNode has value of " << newNode->data << std::endl;
+
+
+		//splay newnode to top of left subtree
+		nd->left->parent = nullptr;
+		splayf(newNode);
+
+		//join left subtree with right subtree
+		newNode->right = nd->right;
+		newNode->right->parent = newNode;
+
+/*
 		//setting children
 		if(newNode != nd->left)
 		{
+			
 			newNode->left = nd->left;
 			newNode->left->parent = newNode;
         }
@@ -317,9 +346,10 @@ node* splay::deleteKey(double dta)
         newNode->parent = nd->parent;
         if(nd->parent->left == nd) nd->parent->left = newNode;
         else nd->parent->right = newNode;
+*/
     }
     return nd;
 }
-*/
+
 
 //sorted array

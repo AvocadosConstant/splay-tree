@@ -57,74 +57,52 @@ int main(int argc, char const *argv[])
   std::cout << std::endl << "breadth first print" << std::endl;
   s.printBreadthFirst();
 
-/*
+
+  std::cout << std::endl;
+  std::cout << "searching for 9" << std::endl;
+  s.search(9);
   std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
-
- // std::cout << "proving" << std::endl;
-
   std::cout << std::endl << "breadth first print" << std::endl;
   s.printBreadthFirst();
 
-  std::cout << std::endl << "left rotate on root" << std::endl;
-  s.leftRotate(s.getRoot());
-
+  std::cout << std::endl;
+  std::cout << "searching for 12" << std::endl;
+  s.search(12);
   std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
-
   std::cout << std::endl << "breadth first print" << std::endl;
   s.printBreadthFirst();
 
-  std::cout << std::endl << "right rotate on root" << std::endl;
-  s.rightRotate(s.getRoot());
 
-  std::cout << std::endl << "inorder print" << std::endl;
-  s.inOrder();
-
-  std::cout << std::endl << "breadth first print" << std::endl;
-  s.printBreadthFirst();
-*/
-
-/*
-  std::cout << std::endl << "left rotate on right of root" << std::endl;
-  s.leftRotate(s.getRoot()->right);
-
-  std::cout << std::endl << "inorder print" << std::endl;
-  s.inOrder();
-
-  std::cout << std::endl << "breadth first print" << std::endl;
-  s.printBreadthFirst();
-*/
-
-/*
-  std::cout << std::endl << "splay on left of right of root" << std::endl;
-  s.splayf(s.getRoot()->right->left);
-
-  std::cout << std::endl << "inorder print" << std::endl;
-  s.inOrder();
-
-  std::cout << std::endl << "breadth first print" << std::endl;
-  s.printBreadthFirst();
-*/
-
-/*
   std::cout << "del 11" << std::endl;
   s.deleteKey(11);
+  std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
   std::cout << "del 6" << std::endl;
   s.deleteKey(6);
+  std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
   std::cout << "del nonexistant num" << std::endl;
   s.deleteKey(21);
+  std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
+
   std::cout << "del 20" << std::endl;
   s.deleteKey(20);
+  std::cout << std::endl << "inorder print" << std::endl;
   s.inOrder();
-*/
-//  s.search(8);
-  //s.search(12);
+  std::cout << std::endl << "breadth first print" << std::endl;
+  s.printBreadthFirst();
 
-  std::cout << "main is running." << std::endl;
   return 0;
 
 }
