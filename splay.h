@@ -20,8 +20,7 @@ class splay
         node* min(node* nd);
         node* max(node* nd);
 		node* deleteKey(double dta);
-	    //void switchf(node* nd1, node* nd2);
-		std::vector<double> sortedArray(); //return array of tree with items inOrder
+		std::vector<double> sortedArray();
 		node* getRoot(){return root;};
 		int getSize(){return size;};
 		void print();
