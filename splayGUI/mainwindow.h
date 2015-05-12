@@ -11,6 +11,7 @@
 #include <QSlider>
 #include <QColor>
 #include <QLineEdit>
+#include "../splay.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,9 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+public slots:
+    void firstSlot();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -32,8 +36,14 @@ private:
     QWidget *controlPanel;
     QHBoxLayout *controlPanelLayout;
 
-    QLabel *insertLabel;
+    QPushButton *insertButton;
     QLineEdit *insertText;
+
+    QWidget *infoWidget;
+    QVBoxLayout *infoLayout;
+    QLabel *inOrderLabel;
+
+    splay s;
 };
 
 #endif // MAINWINDOW_H
