@@ -6,7 +6,7 @@ main: splay.o main.o
 main.o: main.cpp
 	g++ -c -g -std=c++11 main.cpp
 
-splay.o: splay.h splay.cpp
+splay.o: splay.h
 	g++ -g -c -std=c++11 splay.cpp
 
 clean:

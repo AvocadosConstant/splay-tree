@@ -2,28 +2,31 @@
 #include <queue>
 #include <stack>
 
-splay::~splay()
+template<class T>
+splay<T>::~splay()
 {
 }
 
 //-----------
 // insert
 //-----------
-void splay::insert(double dta)
+template<class T>
+void splay<T>::insert(T dta)
 {
 	size++;
 	std::cout << std::endl << "Insert: " << dta << std::endl;
 
 	if(root == nullptr)
 	{
-		node *newNode = new node(dta);
+		node<T> *newNode = new node<T>(dta);
 		root = newNode;
 		return;
 	}
 	insert(root, dta);
 }
 
-void splay::insert(node *nd,double dta)
+template<class T>
+void splay<T>::insert( node<T> *nd,T dta)
 {
     if(nd == nullptr)return;
 
@@ -31,7 +34,7 @@ void splay::insert(node *nd,double dta)
 	{
         if(nd->right == nullptr)
 		{
-            node *newNode = new node(dta);
+            node<T> *newNode = new node<T>(dta);
             nd->right = newNode;
             newNode->parent = nd;
             splayf(newNode);
@@ -42,7 +45,7 @@ void splay::insert(node *nd,double dta)
 	{
         if(nd->left == nullptr)
 		{
-            node *newNode = new node(dta);
+            node<T> *newNode = new node<T>(dta);
             nd->left = newNode;
             newNode->parent = nd;
             splayf(newNode);
@@ -55,11 +58,12 @@ void splay::insert(node *nd,double dta)
 //-----------
 // leftRotate
 //-----------
-void splay::leftRotate(node* nd)
+template<class T>
+void splay<T>::leftRotate( node<T>* nd)
 {
     if (nd == nullptr) return;
 
-    node* tmp = nd->right;
+    node<T>* tmp = nd->right;
     nd->right = tmp->left;
     tmp->left = nd;
     if(nd->right != nullptr) nd->right->parent = nd;
@@ -75,11 +79,12 @@ void splay::leftRotate(node* nd)
 //-----------
 // rightRotate
 //-----------
-void splay::rightRotate(node* nd)
+template<class T>
+void splay<T>::rightRotate( node<T>* nd)
 {
 	if(nd == nullptr) return;
 
-    node* tmp = nd->left;
+    node<T>* tmp = nd->left;
     nd->left = tmp->right;
     tmp->right = nd;
     if(nd->left != nullptr) nd->left->parent = nd;
@@ -95,7 +100,8 @@ void splay::rightRotate(node* nd)
 //-----------
 // splayf
 //-----------
-void splay::splayf(node* nd)
+template<class T>
+void splay<T>::splayf( node<T>* nd)
 {
     while(nd->parent != nullptr)
 	{
@@ -141,12 +147,13 @@ void splay::splayf(node* nd)
 //-----------
 // print Breadth
 //-----------
-void splay::printBreadthFirst(){
+template<class T>
+void splay<T>::printBreadthFirst(){
     if(root == nullptr)return;
-    std::queue<node*> qe;
+    std::queue< node<T>* > qe;
     qe.push(root);
     while(!qe.empty()){
-        node* tmp = qe.front();
+        node<T>* tmp = qe.front();
         if(tmp->left != nullptr){
 //            std::cout << "/" << std::endl;
             qe.push(tmp->left);
@@ -165,13 +172,15 @@ void splay::printBreadthFirst(){
 //-----------
 // inOrder
 //-----------
-void splay::inOrder()
+template<class T>
+void splay<T>::inOrder()
 {
 	if(root == nullptr) return;
 	inOrder(root);
 }
 
-void splay::inOrder(node* nd)
+template<class T>
+void splay<T>::inOrder( node<T>* nd)
 {
 	if(nd == nullptr) return;
 	inOrder(nd->left);
@@ -183,13 +192,15 @@ void splay::inOrder(node* nd)
 //-----------
 // search
 //-----------
-node* splay::search(double dta)
+template<class T>
+node<T>* splay<T>::search(T dta)
 {
 	if(root == nullptr) return nullptr;
 	return search(root, dta);
 }
 
-node* splay::search(node *nd, double dta)
+template<class T>
+node<T>* splay<T>::search( node<T> *nd, T dta)
 {
 	if(nd == nullptr)
 	{
@@ -213,7 +224,8 @@ node* splay::search(node *nd, double dta)
 //-----------
 // min
 //-----------
-node* splay::min(node *nd){
+template<class T>
+node<T>* splay<T>::min( node<T> *nd){
     if(nd == nullptr)return nullptr;
     if(nd->left == nullptr){
         return nd;
@@ -225,7 +237,8 @@ node* splay::min(node *nd){
 //-----------
 // max
 //-----------
-node* splay::max(node *nd){
+template<class T>
+node<T>* splay<T>::max( node<T> *nd){
     if(nd == nullptr)return nullptr;
     if(nd->right == nullptr) return nd;
     return max(nd->right);
@@ -235,10 +248,11 @@ node* splay::max(node *nd){
 //-----------
 // deleteKey
 //-----------
-node* splay::deleteKey(double dta)
+template<class T>
+node<T>* splay<T>::deleteKey(T dta)
 {
     if(root == nullptr)return nullptr;
-    node* nd = search(dta);
+    node<T>* nd = search(dta);
     if (nd == nullptr)return nullptr;
 
 	//because search was called, nd is the root!!!
@@ -262,7 +276,7 @@ node* splay::deleteKey(double dta)
     //If node to delete has two children
 	else
 	{
-        node* newNode = max(nd->left);	//newNode is rightmost child of left subtree
+        node<T>* newNode = max(nd->left);	//newNode is rightmost child of left subtree
 
 		//splay newnode to top of left subtree
 		nd->left->parent = nullptr;
@@ -281,15 +295,17 @@ node* splay::deleteKey(double dta)
 //-----------
 // sorted Array
 //-----------
-std::vector<double> splay::sortedArray()
+template<class T>
+std::vector<T> splay<T>::sortedArray()
 {
-	std::vector<double> vct;
+	std::vector<T> vct;
 	if(root == nullptr) return vct;
 	sortedArray(root, vct);
 	return vct;
 }
 
-void splay::sortedArray(node* nd, std::vector<double>& vct)
+template<class T>
+void splay<T>::sortedArray( node<T>* nd, std::vector<T>& vct)
 {
 	if(nd == nullptr) return;
 	sortedArray(nd->left, vct);
@@ -301,7 +317,8 @@ void splay::sortedArray(node* nd, std::vector<double>& vct)
 //-----------
 // print
 //-----------
-void splay::print()
+template<class T>
+void splay<T>::print()
 {
 	std::cout << "- Size: " << size << std::endl;
 	std::cout << "- InOrder Print" << std::endl;

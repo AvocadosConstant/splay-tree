@@ -6,7 +6,7 @@
 
 int main(int argc, char const *argv[])
 {
-  splay s;
+  splay<double> s;
 
   s.insert(9);
   s.print();
