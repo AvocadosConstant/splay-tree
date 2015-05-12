@@ -2,6 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
+#include <QPushButton>
+#include <QWidget>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QSlider>
+#include <QColor>
+#include <QLineEdit>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +26,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QWidget *window;
+    QVBoxLayout *mainLayout;
+
+    QWidget *controlPanel;
+    QHBoxLayout *controlPanelLayout;
+
+    QLabel *insertLabel;
+    QLineEdit *insertText;
 };
 
 #endif // MAINWINDOW_H
