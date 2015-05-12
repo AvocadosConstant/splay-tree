@@ -4,6 +4,10 @@
 
 splay::~splay()
 {
+    while(root) {
+        node* nd = deleteKey(root->data);
+        delete nd;
+    }
 }
 
 //-----------
@@ -141,8 +145,12 @@ void splay::splayf(node* nd)
 //-----------
 // print Breadth
 //-----------
-void splay::printBreadthFirst(){
-    if(root == nullptr)return;
+std::vector<double> splay::printBreadthFirst(){
+
+    std::vector<double> vct;
+
+    if(root == nullptr)return vct;
+
     std::queue<node*> qe;
     qe.push(root);
     while(!qe.empty()){
@@ -156,10 +164,11 @@ void splay::printBreadthFirst(){
 //            std::cout << "\\" << std::endl;
         }
 
-        std::cout<< tmp->data << std::endl;
-
+        //std::cout<< tmp->data << std::endl;
+        vct.push_back(tmp->data);
         qe.pop();
     }
+    return vct;
 }
 
 //-----------

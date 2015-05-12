@@ -27,6 +27,7 @@ public slots:
     void deleteSlot();
     void findSlot();
     void displayInOrder();
+    void displayBreadth();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -37,15 +38,24 @@ private:
     QWidget *window;
     QVBoxLayout *mainLayout;
 
-    QWidget *controlPanel;
-    QHBoxLayout *controlPanelLayout;
+    QWidget *contentWidget;
+    QHBoxLayout *contentLayout;
 
+    QWidget *controlPanel;
+    QVBoxLayout *controlPanelLayout;
+
+        QWidget* insertWidget;
+        QHBoxLayout* insertLayout;
         QPushButton *insertButton;
         QLineEdit *insertText;
 
+        QWidget* deleteWidget;
+        QHBoxLayout* deleteLayout;
         QPushButton *deleteButton;
         QLineEdit *deleteText;
 
+        QWidget* findWidget;
+        QHBoxLayout* findLayout;
         QPushButton *findButton;
         QLineEdit *findText;
 
@@ -54,8 +64,12 @@ private:
 
     QWidget *infoWidget;
     QVBoxLayout *infoLayout;
+        QLabel *inOrderLabel;
+        QLabel *breadthLabel;
+
+
     QLabel *commandLabel;
-    QLabel *inOrderLabel;
+    QLabel *consoleLabel;
 
     splay s;
 };

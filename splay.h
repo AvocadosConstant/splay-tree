@@ -14,7 +14,7 @@ class splay
 	    void leftRotate(node* nd);
 	    void rightRotate(node* nd);
 	    void splayf(node* nd);
-	    void printBreadthFirst();
+        std::vector<double> printBreadthFirst();
 		void inOrder();
 		node* search(double dta);
         node* min(node* nd);
